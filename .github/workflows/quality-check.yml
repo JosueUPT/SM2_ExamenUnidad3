@@ -1,4 +1,4 @@
-name: TEST
+name: Quality Check
 
 on:
   push:
@@ -16,22 +16,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter_version: 'stable'  
+
     - name: Navigate to aplicativo_movil directory
       run: cd aplicativo_movil
 
-    - name: Set up Dart
-      uses: dart-lang/setup-dart@v1
-      with:
-        sdk: stable
-
     - name: Install dependencies
-      run: dart pub get
-      working-directory: aplicativo_movil  
+      run: flutter pub get
+      working-directory: aplicativo_movil
 
     - name: Analyze code
-      run: dart analyze
-      working-directory: aplicativo_movil  
+      run: flutter analyze
+      working-directory: aplicativo_movil
 
     - name: Run tests
-      run: dart test
-      working-directory: aplicativo_movil  
+      run: flutter test
+      working-directory: aplicativo_movil
