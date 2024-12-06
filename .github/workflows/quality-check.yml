@@ -1,4 +1,4 @@
-name: Test
+name: TEST
 
 on:
   push:
@@ -16,6 +16,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Navigate to aplicativo_movil directory
+      run: cd aplicativo_movil
+
     - name: Set up Dart
       uses: dart-lang/setup-dart@v1
       with:
@@ -23,9 +26,12 @@ jobs:
 
     - name: Install dependencies
       run: dart pub get
+      working-directory: aplicativo_movil  
 
     - name: Analyze code
       run: dart analyze
+      working-directory: aplicativo_movil  
 
     - name: Run tests
       run: dart test
+      working-directory: aplicativo_movil  
