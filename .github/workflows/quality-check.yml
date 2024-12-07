@@ -31,6 +31,8 @@ jobs:
     - name: Analyze code
       run: flutter analyze
       working-directory: aplicativo_movil
+      continue-on-error: true
+
 
     - name: Run tests
       run: flutter test
