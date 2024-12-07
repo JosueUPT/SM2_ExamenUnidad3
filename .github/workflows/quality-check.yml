@@ -21,33 +21,19 @@ jobs:
       with:
         flutter_version: 'stable'  
 
+    - name: Navigate to aplicativo_movil directory
+      run: cd aplicativo_movil
+
     - name: Install dependencies
       run: flutter pub get
       working-directory: aplicativo_movil
 
     - name: Analyze code
-      run: |
-        flutter analyze > analysis_result.txt
-      working-directory: aplicativo_movil
-
-    - name: Run tests
-      run: |
-        flutter test --machine | tojunit --output tests.xml
+      run: flutter analyze
       working-directory: aplicativo_movil
       continue-on-error: true
 
-    - name: Generate HTML Report
-      run: |
-        tojunit tests.xml > test_report.html
-        echo '<h1>Analysis Report</h1><pre>' > analysis_report.html
-        cat analysis_result.txt >> analysis_report.html
-        echo '</pre>' >> analysis_report.html
-      working-directory: aplicativo_movil
 
-    - name: Upload Reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: reports
-        path: |
-          aplicativo_movil/test_report.html
-          aplicativo_movil/analysis_report.html
+    - name: Run tests
+      run: flutter test
+      working-directory: aplicativo_movil
